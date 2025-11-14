@@ -1,6 +1,27 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import Category from "./pages/Category";
+import Filter from "./pages/Filter";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { Toaster } from "react-hot-toast";
+
 const App = () => {
   return(
-    <div className="text-3xl font-bold underline">Inventory</div>
+    <>
+      <Toaster />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/dashboard" element={<Home />}/>
+          <Route path="/product" element={<Product />}/>
+          <Route path="/category" element={<Category />}/>
+          <Route path="/filter" element={<Filter />}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 
