@@ -1,0 +1,45 @@
+import axios from "axios";
+
+const axiosConfig = axios.create({
+    baseURL: "https://inventory-back-end-3u2z.onrender.com/api/v1.0",
+    headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+    }
+});
+
+const excludeEndpoints = ["/login", "/register", "/status", "/health"];
+
+axiosConfig.interceptors.request.use((config) => {
+    const shouldSkipToken = excludeEndpoints.some((endpoint) => {
+        return config.url?.includes(endpoint)
+    });
+
+    if (!shouldSkipToken) {
+        const token = localStorage.getItem("token");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token};`
+        }
+    }
+
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
+axiosConfig.interceptors.response.use((response) => {
+    return response;
+}, (error) => {
+    if (error.response) {
+        if (error.response.status === 401) {
+            window.location.href = "/login";
+        } else if (error.response.status === 500) {
+            console.error("Server error. Please try again later.");
+        }
+    } else if (error.code === "ECONNECTIONABORTED") {
+        console.error("Request timeout. Please try again later.");
+    }
+
+    return Promise.reject(error);
+    
+})
