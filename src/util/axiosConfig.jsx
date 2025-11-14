@@ -1,7 +1,8 @@
 import axios from "axios";
+import {BASE_URL} from "./apiEndpoints";
 
 const axiosConfig = axios.create({
-    baseURL: "https://inventory-back-end-3u2z.onrender.com/api/v1.0",
+    BASE_URL,
     headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -41,5 +42,5 @@ axiosConfig.interceptors.response.use((response) => {
     }
 
     return Promise.reject(error);
-    
+
 })
