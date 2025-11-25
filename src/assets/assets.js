@@ -1,5 +1,5 @@
 import logo from "./inventario.png";
-import loginBg from "./pexels-polina-tankilevitch-4440789.jpg";
+import loginBg from "./warehouse-storage-shelves-with-cardboard-boxes.jpg";
 
 export const assets = {
     logo,

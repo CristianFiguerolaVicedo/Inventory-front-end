@@ -19,6 +19,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         if (!name.trim()) {
             setError("Please enter your name.");

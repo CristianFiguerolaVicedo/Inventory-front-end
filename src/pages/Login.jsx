@@ -1,17 +1,64 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {assets} from "../assets/assets";
 import { LoaderCircle } from "lucide-react";
 import Input from "../components/Input";
+import { validateEmail } from "../util/validation";
+import axiosConfig from "../util/axiosConfig";
+import { API_ENDPOINTS } from "../util/apiEndpoints";
+import toast from "react-hot-toast";
+import AppContext from "../context/AppContext";
 
 const Login = () => {
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+    const {setUser} = useContext(AppContext);
+
     const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true)
+
+        if (!email.trim()) {
+            setError("Please enter a valid email.");
+            setIsLoading(false);
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setError("Please enter a valid email.");
+            setIsLoading(false);
+            return;
+        }
+
+        if (!password.trim()) {
+            setError("Please enter your password.");
+            setIsLoading(false);
+            return;
+        }
+
+        setError(null);
+
+        try {
+            const response = await axiosConfig.post(API_ENDPOINTS.LOGIN, {email, password});
+            const {token, user} = response.data;
+            if (token) {
+                localStorage.setItem("token", token);
+                setUser(user);
+                toast.success("Successfully logged in!");
+                navigate("/dashboard");
+            }
+        } catch (error) {
+            console.error("Something went wrong", error);
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     return(
         <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
@@ -28,7 +75,7 @@ const Login = () => {
                             Please enter your credentials to log in
                         </p>
 
-                        <form className="space-y-4 w-[70%]">
+                        <form onSubmit={handleSubmit} className="space-y-4 w-[70%]">
                             <Input 
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
