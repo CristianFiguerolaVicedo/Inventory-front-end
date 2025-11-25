@@ -2,7 +2,7 @@ import axios from "axios";
 import {BASE_URL} from "./apiEndpoints";
 
 const axiosConfig = axios.create({
-    BASE_URL,
+    baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -44,3 +44,5 @@ axiosConfig.interceptors.response.use((response) => {
     return Promise.reject(error);
 
 })
+
+export default axiosConfig;
