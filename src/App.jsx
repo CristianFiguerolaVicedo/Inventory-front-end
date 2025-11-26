@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Product from "./pages/Product";
 import Category from "./pages/Category";
 import Filter from "./pages/Filter";
@@ -12,6 +12,7 @@ const App = () => {
       <Toaster />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Root />}/>
           <Route path="/product" element={<Product />}/>
           <Route path="/category" element={<Category />}/>
           <Route path="/filter" element={<Filter />}/>
@@ -20,6 +21,15 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </>
+  )
+}
+
+const Root = () => {
+  const isAuthenticated = !!localStorage.getItem("token");
+  return isAuthenticated ? (
+    <Navigate to="/product" />
+  ) : (
+    <Navigate to="/login" />
   )
 }
 

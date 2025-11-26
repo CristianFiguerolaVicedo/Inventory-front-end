@@ -1,6 +1,8 @@
 import Dashboard from "../components/Dashboard";
+import useUser from "../hooks/useUserHook";
 
 const Product = () => {
+    useUser();
     return(
         <div>
             <Dashboard activeMenu="Products">

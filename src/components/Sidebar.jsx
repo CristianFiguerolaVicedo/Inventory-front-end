@@ -5,7 +5,7 @@ const Sidebar = ({ activeMenu }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-64 h-[calc(100vh-61px)] bg-[#949488] border-gray-200/50 p-5 sticky top-[61px] z-20 text-[#e5e1df]">
+    <div className="w-64 h-[calc(100vh-73px)] bg-[#949488] border-gray-200/50 p-5 sticky top-[73px] z-20 text-[#e5e1df]">
       {SIDE_BAR_DATA.map((item, index) => (
         <button
           onClick={() => navigate(item.path)}

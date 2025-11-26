@@ -11,12 +11,6 @@ const Menubar = ({ activeMenu }) => {
   const { userProfile, clearUser } = useContext(AppContext);
   const navigate = useNavigate();
 
-  console.log("MENUBAR USER:", userProfile);
-
-  useEffect(() => {
-  console.log("USER CAMBIÓ:", userProfile);
-}, [userProfile]);
-
   const handleLogout = () => {
     localStorage.clear();
     clearUser();
@@ -66,10 +60,6 @@ const Menubar = ({ activeMenu }) => {
         </div>
       </div>
 
-      <div>
-        <h2 className="text-2xl text-[#e5e1df]">Welcome, {userProfile.name}</h2>
-      </div>
-
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setShowDropdown(!showDropdown)}
@@ -88,7 +78,7 @@ const Menubar = ({ activeMenu }) => {
                     <div className="flex items-center gap-3">
                         <div className="flex items-center justify-center w-8 h-8 bg-[#e5e1df] rounded-full">
                             {userProfile?.profileImageUrl ? (
-                                <img src={userProfile?.profileImageUrl || ""} alt="profile image" className="h-10 w-10 bg-slate-400 rounded-full"/>
+                                <img src={userProfile?.profileImageUrl || ""} alt="profile image" className="h-8 w-10 bg-slate-400 rounded-full"/>
                             ) : (
                                 <User className="text-[#949488] w-10 h-10"/>
                             )}
