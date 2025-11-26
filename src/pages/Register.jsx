@@ -8,7 +8,7 @@ import axiosConfig from "../util/axiosConfig";
 import { API_ENDPOINTS } from "../util/apiEndpoints";
 import toast from "react-hot-toast";
 import ProfileImageSelector from "../components/ProfileImageSelector";
-import {uploadProfileImage} from "../util/uploadProfileImage";
+import uploadProfileImage from "../util/uploadProfileImage";
 
 const Register = () => {
     const [name, setName] = useState("");

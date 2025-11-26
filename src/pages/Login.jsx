@@ -50,7 +50,7 @@ const Login = () => {
                 localStorage.setItem("token", token);
                 setUser(user);
                 toast.success("Successfully logged in!");
-                navigate("/dashboard");
+                navigate("/product");
             }
         } catch (error) {
             console.error("Something went wrong", error);

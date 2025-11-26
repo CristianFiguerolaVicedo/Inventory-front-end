@@ -1,6 +1,6 @@
 import { API_ENDPOINTS } from "./apiEndpoints";
 
-const CLODINARY_UPLOAD_PRESET = "moneymanager";
+const CLODINARY_UPLOAD_PRESET = "inventory";
 
 const uploadProfileImage = async (image) => {
     const formData = new FormData();

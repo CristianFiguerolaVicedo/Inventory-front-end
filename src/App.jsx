@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Category from "./pages/Category";
 import Filter from "./pages/Filter";
@@ -13,7 +12,6 @@ const App = () => {
       <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route path="/dashboard" element={<Home />}/>
           <Route path="/product" element={<Product />}/>
           <Route path="/category" element={<Category />}/>
           <Route path="/filter" element={<Filter />}/>
