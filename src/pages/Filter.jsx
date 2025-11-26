@@ -1,6 +1,10 @@
+import Dashboard from "../components/Dashboard";
+
 const Filter = () => {
     return(
-        <div>Filter</div>
+        <Dashboard activeMenu="Filter">
+            This is the filter page
+        </Dashboard>
     )
 }
 

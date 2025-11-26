@@ -15,7 +15,7 @@ const Login = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const {setUser} = useContext(AppContext);
+    const {setUserProfile} = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -45,10 +45,11 @@ const Login = () => {
 
         try {
             const response = await axiosConfig.post(API_ENDPOINTS.LOGIN, {email, password});
-            const {token, user} = response.data;
+            const {token, userProfile} = response.data;
             if (token) {
                 localStorage.setItem("token", token);
-                setUser(user);
+                setUserProfile(userProfile);
+                console.log("USER SETEADO:", userProfile);
                 toast.success("Successfully logged in!");
                 navigate("/product");
             }

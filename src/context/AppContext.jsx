@@ -3,11 +3,16 @@ import { createContext, useState } from "react";
 const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
-    const [user, setUser] = useState(null);
+    const [userProfile, setUserProfile] = useState(null);
+
+    const clearUser = () => {
+        setUserProfile(null);
+    }
 
     const contextValue = {
-        user,
-        setUser
+        userProfile,
+        setUserProfile,
+        clearUser
     }
 
     return (

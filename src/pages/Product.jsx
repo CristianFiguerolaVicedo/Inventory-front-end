@@ -1,6 +1,12 @@
+import Dashboard from "../components/Dashboard";
+
 const Product = () => {
     return(
-        <div>Product</div>
+        <div>
+            <Dashboard activeMenu="Products">
+                This is the product page
+            </Dashboard>
+        </div>
     )
 }
 
