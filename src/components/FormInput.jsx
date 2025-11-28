@@ -1,7 +1,7 @@
     import { Eye, EyeOff } from "lucide-react";
     import { useState } from "react";
 
-    const Input = ({
+    const FormInput = ({
     label,
     value,
     onChange,
@@ -17,7 +17,7 @@
 
     return (
         <div className="mb-4">
-        <label className="text-[16px] text-[#949488] mb-1">{label}</label>
+        <label className="text-[16px] text-[#505746] mb-1">{label}</label>
         <div className="relative">
             {isSelect ? (
             <select
@@ -33,7 +33,7 @@
             </select>
             ) : (
             <input
-                className="w-full bg-transparent outline-none border border-[#717866] rounded-md py-2 px-3 pr-10 text-[#949488] leading-tight focus:outline-none focus:border-[#505746]"
+                className="w-full bg-transparent outline-none border border-[#505746] rounded-md py-2 px-3 pr-10 text-[#505746] leading-tight focus:outline-none focus:border-[#505746]"
                 type={
                 type === "password" ? (showPassword ? "text" : "password") : type
                 }
@@ -65,4 +65,4 @@
     );
     };
 
-    export default Input;
+    export default FormInput;
