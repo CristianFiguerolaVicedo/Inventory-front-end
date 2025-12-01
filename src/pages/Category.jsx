@@ -8,6 +8,7 @@ import { API_ENDPOINTS } from "../util/apiEndpoints";
 import toast from "react-hot-toast";
 import Modal from "../components/Modal";
 import AddCategoryForm from "../components/AddCategoryForm";
+import DeleteCategoryForm from "../components/DeleteCategoryForm";
 
 const Category = () => {
     useUser();
@@ -17,6 +18,8 @@ const Category = () => {
     const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
     const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+    const [openDeleteCategoryModal, setOpenDeleteCategoryModal] = useState(false);
 
     const fetchCategoryDetails = async () => {
         if (loading) return;
@@ -76,6 +79,11 @@ const Category = () => {
         setOpenEditCategoryModal(true);
     }
 
+    const handleDeleteCategory = (categoryId) => {
+        setSelectedCategoryId(categoryId);
+        setOpenDeleteCategoryModal(true);
+    }
+
     const handleUpdateCategory = async (updatedCategory) => {
         const {id, name} = updatedCategory;
 
@@ -101,6 +109,24 @@ const Category = () => {
         }
     }
 
+    const handleEliminateCategory = async (id) => {
+        if (!id) {
+            toast.error("Category id is missing for update.");
+            return;
+        }
+
+        try {
+            await axiosConfig.delete(API_ENDPOINTS.DELETE_CATEGORY(id));
+            setOpenDeleteCategoryModal(false);
+            setSelectedCategoryId(null);
+            toast.success("Category deleted successfully!");
+            fetchCategoryDetails();
+        } catch (error) {
+            console.error("Error deleting category", error);
+            toast.error(error.response?.data?.message || "Failed to delete category.");
+        }
+    }
+
     return(
         <Dashboard activeMenu="Categories">
             <div className="my-5 mx-auto">
@@ -113,7 +139,7 @@ const Category = () => {
                     </button>
                 </div>
                 {/*Category List */}
-                <CategoryList categories={categoryData} onEditCategory={handleEditCategory}/>
+                <CategoryList categories={categoryData} onEditCategory={handleEditCategory} onDeleteCategory={handleDeleteCategory}/>
 
                 {/*Adding category modal */}
                 <Modal
@@ -131,6 +157,14 @@ const Category = () => {
                     onClose={() => {setOpenEditCategoryModal(false), setSelectedCategory(null)}}
                 >
                     <AddCategoryForm onAddCategory={handleUpdateCategory} isEditing={true} initialCategoryData={selectedCategory}/>
+                </Modal>
+
+                <Modal
+                    title="Delete Category"
+                    isOpen={openDeleteCategoryModal}
+                    onClose={() => {setOpenDeleteCategoryModal(false), setSelectedCategoryId(null)}}
+                >
+                    <DeleteCategoryForm onDeleteCategory={handleEliminateCategory} initialCategoryData={selectedCategoryId}/>
                 </Modal>
             </div>
         </Dashboard>
