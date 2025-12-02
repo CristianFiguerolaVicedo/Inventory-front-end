@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FormInput from "./FormInput";
+import { LoaderCircle } from "lucide-react";
 
 const AddProductForm = ({onAddProduct, categories}) => {
     const [product, setProduct] = useState({

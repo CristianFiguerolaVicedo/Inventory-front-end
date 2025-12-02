@@ -57,7 +57,7 @@ const Product = () => {
     }
 
     const handleAddProduct = async (product) => {
-        const {name, stock, packaging_price, pvp, status, notes, categoryId} = product;
+        const {name, stock, production_price, packaging, pvp, status, notes, categoryId} = product;
 
         if (!name.trim()) {
             toast.error("Please enter a name");
@@ -65,22 +65,22 @@ const Product = () => {
         }
 
         if (!stock || isNaN(stock) || Number(stock) <= 0) {
-            toast.error("Please enter a valid number");
+            toast.error("Please enter a valid stock number");
             return;
         }
 
-        if (!stock || isNaN(stock) || Number(stock) <= 0) {
-            toast.error("Please enter a valid number");
+        if (!production_price || isNaN(production_price) || Number(production_price) <= 0) {
+            toast.error("Please enter a valid production price number");
             return;
         }
 
-        if (!packaging_price || isNaN(packaging_price) || Number(packaging_price) <= 0) {
-            toast.error("Please enter a valid number");
+        if (!packaging || isNaN(packaging) || Number(packaging) <= 0) {
+            toast.error("Please enter a valid packaging price number");
             return;
         }
 
         if (!pvp || isNaN(pvp) || Number(pvp) <= 0) {
-            toast.error("Please enter a valid number");
+            toast.error("Please enter a valid pvp number");
             return;
         }
 
@@ -95,11 +95,13 @@ const Product = () => {
         }
 
         try {
+            console.log("Producto para add", product);
             const response = await axiosConfig.post(API_ENDPOINTS.ADD_PRODUCT, {
                 name,
-                packaging_price,
-                pvp,
-                stock,
+                packaging: Number(packaging),
+                productionPrice: Number(production_price),
+                pvp: Number(pvp),
+                stock: Number(stock),
                 status,
                 notes,
                 categoryId
@@ -166,6 +168,7 @@ const Product = () => {
                             products={productData}
                             onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
                             onDownload={handleDownloadProductDetails}
+                            categories={categories}
                         />
 
                         <Modal
