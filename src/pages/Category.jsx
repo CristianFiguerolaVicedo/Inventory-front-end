@@ -8,7 +8,7 @@ import { API_ENDPOINTS } from "../util/apiEndpoints";
 import toast from "react-hot-toast";
 import Modal from "../components/Modal";
 import AddCategoryForm from "../components/AddCategoryForm";
-import DeleteCategoryForm from "../components/DeleteCategoryForm";
+import DeleteAlert from "../components/DeleteAlert";
 
 const Category = () => {
     useUser();
@@ -18,8 +18,10 @@ const Category = () => {
     const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
     const [openEditCategoryModal, setOpenEditCategoryModal] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-    const [openDeleteCategoryModal, setOpenDeleteCategoryModal] = useState(false);
+    const [openDeleteAlert, setOpenDeleteAlert] = useState({
+        show: false,
+        data: null
+    });
 
     const fetchCategoryDetails = async () => {
         if (loading) return;
@@ -79,11 +81,6 @@ const Category = () => {
         setOpenEditCategoryModal(true);
     }
 
-    const handleDeleteCategory = (categoryId) => {
-        setSelectedCategoryId(categoryId);
-        setOpenDeleteCategoryModal(true);
-    }
-
     const handleUpdateCategory = async (updatedCategory) => {
         const {id, name} = updatedCategory;
 
@@ -109,28 +106,21 @@ const Category = () => {
         }
     }
 
-    const handleEliminateCategory = async (id) => {
-        if (!id) {
-            toast.error("Category id is missing for update.");
-            return;
-        }
-
-        try {
+    const deleteCategory = async (id) => {
+        try{
             await axiosConfig.delete(API_ENDPOINTS.DELETE_CATEGORY(id));
-            setOpenDeleteCategoryModal(false);
-            setSelectedCategoryId(null);
-            toast.success("Category deleted successfully!");
+            setOpenDeleteAlert({show: false, data: null});
+            toast.success("Product deleted successfully!");
             fetchCategoryDetails();
         } catch (error) {
-            console.error("Error deleting category", error);
-            toast.error(error.response?.data?.message || "Failed to delete category.");
+            console.error("Failed to delete the category", error);
+            toast.error(error.response?.data?.message || "Failed to delete the category");
         }
     }
 
     return(
         <Dashboard activeMenu="Categories">
             <div className="my-5 mx-auto">
-                {/*Add button */}
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="text-2xl font-semibold text-[#505746]">Categories</h2>
                     <button onClick={() => setOpenAddCategoryModal(true)} className="flex items-center gap-1 bg-[#949488] rounded-md text-white hover:cursor-pointer hover:bg-[#717866] p-2">
@@ -138,10 +128,9 @@ const Category = () => {
                         Add Category
                     </button>
                 </div>
-                {/*Category List */}
-                <CategoryList categories={categoryData} onEditCategory={handleEditCategory} onDeleteCategory={handleDeleteCategory}/>
 
-                {/*Adding category modal */}
+                <CategoryList categories={categoryData} onEditCategory={handleEditCategory} onDeleteCategory={(id) => setOpenDeleteAlert({show: true, data: id})}/>
+
                 <Modal
                     title="Add Category"
                     isOpen={openAddCategoryModal}
@@ -150,7 +139,6 @@ const Category = () => {
                     <AddCategoryForm onAddCategory={handleAddCategory}/>
                 </Modal>
 
-                {/*Updating category modal */}
                 <Modal
                     title="Edit Category"
                     isOpen={openEditCategoryModal}
@@ -161,10 +149,13 @@ const Category = () => {
 
                 <Modal
                     title="Delete Category"
-                    isOpen={openDeleteCategoryModal}
-                    onClose={() => {setOpenDeleteCategoryModal(false), setSelectedCategoryId(null)}}
+                    isOpen={openDeleteAlert.show}
+                    onClose={() => setOpenDeleteAlert({show: false, data: null})}
                 >
-                    <DeleteCategoryForm onDeleteCategory={handleEliminateCategory} initialCategoryData={selectedCategoryId}/>
+                    <DeleteAlert 
+                        content="Are you sure you want to delete this category?"
+                        onDelete={() => deleteCategory(openDeleteAlert.data)}
+                    />
                 </Modal>
             </div>
         </Dashboard>

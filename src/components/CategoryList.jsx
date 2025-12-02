@@ -5,7 +5,7 @@ const CategoryList = ({categories, onEditCategory, onDeleteCategory}) => {
         <div className="bg-[#e5e1df] rounded-xl shadow-sm border border-gray-200 shadow-xl p-4">
             <div className="flex items-center justify-between mb-4">
                 <h4 className="text-lg font-semibold text-[#717866]">
-                    Category Sources
+                    Categories
                 </h4>
             </div>
 
