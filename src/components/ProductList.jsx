@@ -56,7 +56,7 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
 
       {categories.map((cat) => {
         const catProducts = products.filter((p) => p.categoryId === cat.id);
-        const isExpanded = expandedCategories[cat.id] ?? true;
+        const isExpanded = expandedCategories[cat.id] ?? false;
 
         return (
           <div key={cat.id} className="mt-6">
