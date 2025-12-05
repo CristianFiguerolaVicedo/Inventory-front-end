@@ -80,7 +80,7 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
               <>
                 {catProducts.length > 0 ? (
                   <table className="w-full border-collapse bg-white rounded-lg shadow table-fixed">
-                    <thead className="bg-[#b7b2ac] text-[#505746] text-sm">
+                    <thead className="bg-[#505746] text-[#e5e1df] text-sm">
                       <tr>
                         <th className="p-2 text-left w-1/6">Name</th>
                         <th className="p-2 text-left w-1/12">Packaging</th>
@@ -96,7 +96,7 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
                       {catProducts.map((product) => (
                         <tr
                           key={product.id}
-                          className="border-t border-[#505746] bg-[#949488] text-[#e5e1df]"
+                          className="border-t border-[#505746] bg-[#e5e1df] text-[#717688]"
                         >
                           <td className="p-2 truncate" title={product.name}>
                             {product.name}
@@ -110,17 +110,17 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
                           </td>
                           <td className="p-2">
                             {product.status === "IN_STOCK" && (
-                              <span className="flex items-center gap-1 text-[#e5e1df]">
+                              <span className="flex items-center gap-1 text-green-500">
                                 In Stock <Check className="text-green-500" />
                               </span>
                             )}
                             {product.status === "SOLD_OUT" && (
-                              <span className="flex items-center gap-1 text-[#e5e1df]">
+                              <span className="flex items-center gap-1 text-red-500">
                                 Sold Out <X className="text-red-500" />
                               </span>
                             )}
                             {product.status === "COMING_SOON" && (
-                              <span className="flex items-center gap-1 text-[#e5e1df]">
+                              <span className="flex items-center gap-1 text-orange-500">
                                 Coming Soon{" "}
                                 <Clock className="text-orange-500" />
                               </span>
@@ -129,7 +129,7 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
                           <td className="p-2">
                             <button
                               onClick={() => onDelete(product.id)}
-                              className="text-[#e5e1df] hover:text-red-500 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer"
+                              className="text-[#e5e1df] hover:text-red-400 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer"
                             >
                               <Trash size={18} />
                             </button>

@@ -15,5 +15,6 @@ export const API_ENDPOINTS = {
     ADD_PRODUCT: "/products",
     GET_ALL_PRODUCTS: "/products",
     DELETE_PRODUCT: (productId) => `/products/${productId}`,
+    APPLY_FILTER: "/filter",
     UPLOAD_IMAGE: `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`
 }
