@@ -17,6 +17,8 @@ const Product = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openAddProductModal, setOpenAddProductModal] = useState(false);
+    const [openEditProductModal, setOpenEditProductModal] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [openDeleteAlert, setOpenDeleteAlert] = useState({
         show: false,
         data: null
@@ -95,7 +97,6 @@ const Product = () => {
         }
 
         try {
-            console.log("Producto para add", product);
             const response = await axiosConfig.post(API_ENDPOINTS.ADD_PRODUCT, {
                 name,
                 packaging: Number(packaging),
@@ -128,6 +129,75 @@ const Product = () => {
         } catch (error) {
             console.error("Failed to delete the product", error);
             toast.error(error.response?.data?.message || "Failed to delete the product");
+        }
+    }
+
+    const handleEditProduct = (productToEdit) => {
+        setSelectedProduct(productToEdit);
+        setOpenEditProductModal(true);
+    }
+
+    const handleUpdateProduct = async (updatedProduct) => {
+        const {id, name, stock, packaging, production_price, pvp, status, notes, categoryId} = updatedProduct;
+
+        if (!name.trim()) {
+            toast.error("Please enter a name");
+            return;
+        }
+
+        if (!stock || isNaN(stock) || Number(stock) <= 0) {
+            toast.error("Please enter a valid stock number");
+            return;
+        }
+
+        if (!production_price || isNaN(production_price) || Number(production_price) <= 0) {
+            toast.error("Please enter a valid production price number");
+            return;
+        }
+
+        if (!packaging || isNaN(packaging) || Number(packaging) <= 0) {
+            toast.error("Please enter a valid packaging price number");
+            return;
+        }
+
+        if (!pvp || isNaN(pvp) || Number(pvp) <= 0) {
+            toast.error("Please enter a valid pvp number");
+            return;
+        }
+
+        if (!VALID_STATUS.includes(status)) {
+            toast.error("Invalid status value");
+            return;
+        }
+
+        if (!categoryId) {
+            toast.error("You have to select a category");
+            return;
+        }
+
+        if (!id) {
+            toast.error("Category id is missing for update");
+            return;
+        }
+
+        try {
+            await axiosConfig.put(API_ENDPOINTS.UPDATE_PRODUCT(id), {
+                name,
+                packaging: Number(packaging),
+                productionPrice: Number(production_price),
+                pvp: Number(pvp),
+                stock: Number(stock),
+                status,
+                notes,
+                categoryId
+            });
+            setOpenEditProductModal(false);
+            setSelectedProduct(null);
+            toast.success("Product updated successfully!");
+            fetchProductDetails();
+        } catch (error) {
+            console.error("Error updating product", error);
+            toast.error(error.response?.data?.message || "Failed to update product.");
         }
     }
 
@@ -169,6 +239,7 @@ const Product = () => {
                             onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
                             onDownload={handleDownloadProductDetails}
                             categories={categories}
+                            onEdit={handleEditProduct}
                         />
 
                         <Modal
@@ -178,6 +249,19 @@ const Product = () => {
                         >
                             <AddProductForm 
                                 onAddProduct={(product) => handleAddProduct(product)}
+                                categories={categories}
+                            />
+                        </Modal>
+
+                        <Modal
+                            title="Edit Category"
+                            isOpen={openEditProductModal}
+                            onClose={() => {setOpenEditProductModal(false), setSelectedProduct(null)}}
+                        >
+                            <AddProductForm 
+                                onAddProduct={handleUpdateProduct}
+                                isEditing={true}
+                                initialProductData={selectedProduct}
                                 categories={categories}
                             />
                         </Modal>

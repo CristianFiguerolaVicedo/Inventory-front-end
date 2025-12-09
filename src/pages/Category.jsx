@@ -31,7 +31,6 @@ const Category = () => {
         try {
             const response = await axiosConfig.get(API_ENDPOINTS.GET_CATEGORIES);
             if (response.status === 200) {
-                console.log(response.data);
                 setCategoryData(response.data);
             }
         } catch (error) {

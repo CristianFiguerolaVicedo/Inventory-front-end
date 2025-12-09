@@ -49,7 +49,6 @@ const Login = () => {
             if (token) {
                 localStorage.setItem("token", token);
                 setUserProfile(userProfile);
-                console.log("USER SETEADO:", userProfile);
                 toast.success("Successfully logged in!");
                 navigate("/product");
             }

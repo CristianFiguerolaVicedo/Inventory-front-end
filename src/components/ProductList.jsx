@@ -5,12 +5,13 @@ import {
   Clock,
   Download,
   LoaderCircle,
+  Pencil,
   Trash,
   X,
 } from "lucide-react";
 import { useState } from "react";
 
-const ProductList = ({ products, onDelete, onDownload, categories }) => {
+const ProductList = ({ products, onDelete, onEdit, onDownload, categories }) => {
   const [loading, setLoading] = useState(false);
   const [expandedCategories, setExpandedCategories] = useState({});
 
@@ -132,6 +133,9 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
                               className="text-[#717688] hover:text-red-400 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer"
                             >
                               <Trash size={18} />
+                            </button>
+                            <button onClick={() => onEdit(product)} className="text-[#717688] hover:text-blue-400 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer ml-3">
+                              <Pencil size={18}/>
                             </button>
                           </td>
                         </tr>

@@ -1,9 +1,7 @@
 import { Check, Cross, Download, LoaderCircle, Trash, X } from "lucide-react";
 
 const SaleList = ({ sales, onDelete }) => {
-
-    console.log("Loaded sales", sales);
-
+    
     return(
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
             <div className="flex items-center justify-between">

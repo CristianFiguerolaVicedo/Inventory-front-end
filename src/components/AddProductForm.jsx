@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import FormInput from "./FormInput";
 import { LoaderCircle } from "lucide-react";
 
-const AddProductForm = ({onAddProduct, categories}) => {
+const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories}) => {
     const [product, setProduct] = useState({
         name: "",
         stock: 0,
@@ -16,16 +16,51 @@ const AddProductForm = ({onAddProduct, categories}) => {
 
     const [loading, setLoading] = useState(false);
 
+    const getStatusOptions = () => {
+        if (product.stock > 0) {
+            return [
+                {value: "IN_STOCK", label: "In Stock"}
+            ];
+        } else if (product.stock === 0 || !product.stock) {
+            return [
+                {value: "SOLD_OUT", label: "Sold Out"},
+                {value: "COMING_SOON", label: "Coming Soon"}
+            ];
+        }
+
+        return[];
+    }
+
+    useEffect(() => {
+        if (isEditing && initialProductData) {
+            setProduct({
+                name: initialProductData.name,
+                stock: initialProductData.stock,
+                packaging: initialProductData.packaging,
+                production_price: initialProductData.productionPrice,
+                pvp: initialProductData.pvp,
+                status: initialProductData.status,
+                notes: initialProductData.notes,
+                categoryId: initialProductData.categoryId
+            });
+        } else {
+            setProduct({
+                name: "",
+                stock: 0,
+                packaging: 0,
+                production_price: 0,
+                pvp: 0,
+                status: "",
+                notes: "",
+                categoryId: ""
+            })
+        }
+    }, [isEditing, initialProductData])
+
     const categoryOptions = categories.map(category => ({
         value: category.id,
         label: category.name
     }));
-
-    const statusOptions = [
-        { value: "IN_STOCK", label: "In Stock" },
-        { value: "SOLD_OUT", label: "Sold Out" },
-        { value: "COMING_SOON", label: "Coming Soon" }
-    ]
 
     const handleChange = (key, value) => {
         setProduct({...product, [key]: value});
@@ -46,6 +81,13 @@ const AddProductForm = ({onAddProduct, categories}) => {
             setProduct((prev) => ({...prev, categoryId: categories[0].id}));
         }
     }, [categories, product.categoryId]);
+
+    useEffect(() => {
+        const validStatuses = getStatusOptions().map(opt => opt.value);
+        if (!validStatuses) {
+            setProduct(prev => ({...prev, status: validStatuses[0] || ""}));
+        }
+    }, [product.stock]);
 
     return (
         <div>
@@ -94,7 +136,7 @@ const AddProductForm = ({onAddProduct, categories}) => {
                 onChange={({target}) => handleChange('status', target.value)}
                 label="Status"
                 isSelect={true}
-                options={statusOptions}
+                options={getStatusOptions()}
             />
 
             <FormInput 
@@ -110,11 +152,11 @@ const AddProductForm = ({onAddProduct, categories}) => {
                     {loading ? (
                         <>
                             <LoaderCircle className="w-4 h-4 animate-spin"/>
-                            Adding...
+                            {isEditing ? "Updating..." : "Adding..."}
                         </>
                     ) : (
                         <>
-                            Add Product
+                            {isEditing ? "Update Product" : "Add Product"}
                         </>
                     )}
                 </button>

@@ -15,6 +15,7 @@ export const API_ENDPOINTS = {
     ADD_PRODUCT: "/products",
     GET_ALL_PRODUCTS: "/products",
     DELETE_PRODUCT: (productId) => `/products/${productId}`,
+    UPDATE_PRODUCT: (productId) => `/products/${productId}`,
     APPLY_FILTER: "/filter",
     GET_SALES: "/sales",
     ADD_SALE: "/sales",
