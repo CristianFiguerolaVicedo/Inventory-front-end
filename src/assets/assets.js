@@ -1,4 +1,4 @@
-import { FunnelPlus, List, PackageSearch } from "lucide-react";
+import { FunnelPlus, List, PackageSearch, ShoppingCart } from "lucide-react";
 import logo from "./inventario (2).png";
 import loginBg from "./warehouse-storage-shelves-with-cardboard-boxes.jpg";
 
@@ -22,6 +22,12 @@ export const SIDE_BAR_DATA = [
     },
     {
         id: "3",
+        label: "Sales",
+        icon: ShoppingCart,
+        path: "/sale"
+    },
+    {
+        id: "4",
         label: "Filter",
         icon: FunnelPlus,
         path: "/filter"

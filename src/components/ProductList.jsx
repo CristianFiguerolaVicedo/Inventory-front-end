@@ -129,7 +129,7 @@ const ProductList = ({ products, onDelete, onDownload, categories }) => {
                           <td className="p-2">
                             <button
                               onClick={() => onDelete(product.id)}
-                              className="text-[#e5e1df] hover:text-red-400 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer"
+                              className="text-[#717688] hover:text-red-400 opacity-100 group-hover:opacity-100 transition-opacity cursor-pointer"
                             >
                               <Trash size={18} />
                             </button>

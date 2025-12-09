@@ -195,8 +195,8 @@ const Filter = () => {
               </tbody>
             </table>
           ) : (
-            <p className="text-sm text-gray-400 mt-2">
-              No products in this category.
+            <p className="text-sm text-[#b7b2ac] mt-2">
+              No products filtered. Try aplying a filter.
             </p>
           )}
         </div>
