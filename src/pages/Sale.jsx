@@ -118,7 +118,7 @@ const Sale = () => {
                 details
             });
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 setOpenAddSaleModal(false);
                 toast.success("Sale added successfully!");
                 fetchProductDetails();

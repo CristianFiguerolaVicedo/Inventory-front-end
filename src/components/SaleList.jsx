@@ -43,29 +43,29 @@ const SaleList = ({ sales, onDelete }) => {
                                 <td className="p-2">{sale.sendingFees}</td>
                                 <td className="p-2">{sale.contract ? (
                                     <span className="flex items-center gap-1">
-                                        <Check className="text-[#717688]"/>
+                                        <Check className="text-green-500"/>
                                     </span>
                                 ) : (
                                     <span className="flex items-center gap-1">
-                                        <X className="text-[#717688]"/>
+                                        <X className="text-red-500"/>
                                     </span>
                                 )}</td>
                                 <td className="p-2">{sale.sent ? (
                                     <span className="flex items-center gap-1">
-                                        <Check className="text-[#717688]"/>
+                                        <Check className="text-green-500"/>
                                     </span>
                                 ) : (
                                     <span className="flex items-center gap-1">
-                                        <X className="text-[#717688]"/>
+                                        <X className="text-red-500"/>
                                     </span>
                                 )}</td>
                                 <td className="p-2">{sale.iva ? (
                                     <span className="flex items-center gap-1">
-                                        <Check className="text-[#717688]"/>
+                                        <Check className="text-green-500"/>
                                     </span>
                                 ) : (
                                     <span className="flex items-center gap-1">
-                                        <X className="text-[#717688]"/>
+                                        <X className="text-red-500"/>
                                     </span>
                                 )}</td>
                                 <td className="p-2">{sale.taxes}</td>
