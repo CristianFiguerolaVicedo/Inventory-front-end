@@ -11,10 +11,10 @@ const IncomesList = ({incomes, onDelete}) => {
                 <table className="ww-full table-fixed">
                     <thead className="text-sm text-[#e5e1df] bg-[#505746]">
                         <tr>
-                            <th className="p-2 text-left ww-1/4">Name</th>
-                            <th className="p-2 text-left ww-1/4">Date</th>
-                            <th className="p-2 text-left ww-1/4">Amount</th>
-                            <th className="p-2 text-left ww-1/4">Actions</th>
+                            <th className="p-2 text-left w-1/4">Name</th>
+                            <th className="p-2 text-left w-1/4">Date</th>
+                            <th className="p-2 text-left w-1/4">Amount</th>
+                            <th className="p-2 text-left w-1/4">Actions</th>
                         </tr>
                     </thead>
 

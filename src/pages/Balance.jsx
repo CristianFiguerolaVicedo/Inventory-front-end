@@ -153,7 +153,7 @@ const Balance = () => {
 
                 <ExpenseList 
                     expenses={expenses}
-                    onDelete={(id) => setOpenDeleteAlert({show: true, type: "income", id})}
+                    onDelete={(id) => setOpenDeleteAlert({show: true, type: "expense", id})}
                 />
 
                 <Modal
