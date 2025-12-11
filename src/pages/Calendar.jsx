@@ -8,7 +8,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { Plus, Trash } from "lucide-react";
+import { Plus, Trash, X } from "lucide-react";
 import Modal from "../components/Modal";
 import AddEventForm from "../components/AddEventForm";
 import DeleteAlert from "../components/DeleteAlert";
@@ -163,8 +163,8 @@ const Calendar = () => {
                                     </button>
                                 </div>
                                 <div className="flex justify-end gap-2">
-                                    <button onClick={() => setSelectedEvent(null)} className="px-4 py-2 bg-[#505746] text-white rounded hover:bg-[#24271f] hover:cursor-pointer">
-                                        Close
+                                    <button onClick={() => setSelectedEvent(null)} className="px-4 py-2.5 bg-[#505746] text-white rounded hover:bg-[#24271f] hover:cursor-pointer">
+                                        <X size={18}/>
                                     </button>
                                 </div>
                             </div>

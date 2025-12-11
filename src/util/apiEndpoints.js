@@ -23,5 +23,11 @@ export const API_ENDPOINTS = {
     GET_EVENTS: "/events",
     ADD_EVENT: "/events",
     DELETE_EVENT: (eventId) => `/events/${eventId}`,
+    GET_INCOMES: "/incomes",
+    ADD_INCOME: "/incomes",
+    DELETE_INCOME: (incomeId) => `/incomes/${incomeId}`,
+    GET_EXPENSES: "/expenses",
+    ADD_EXPENSE: "/expenses",
+    DELETE_EXPENSE: (expenseId) => `/expenses/${expenseId}`,
     UPLOAD_IMAGE: `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`
 }

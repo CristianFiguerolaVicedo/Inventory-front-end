@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import Sale from "./pages/Sale";
 import Calendar from "./pages/Calendar";
+import Balance from "./pages/Balance";
 
 const App = () => {
   return(
@@ -15,6 +16,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Root />}/>
+          <Route path="/balance" element={<Balance />}/>
           <Route path="/calendar" element={<Calendar />}/>
           <Route path="/product" element={<Product />}/>
           <Route path="/category" element={<Category />}/>
