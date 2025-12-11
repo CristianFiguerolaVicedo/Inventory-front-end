@@ -1,4 +1,4 @@
-import { FunnelPlus, List, PackageSearch, ShoppingCart } from "lucide-react";
+import { Calendar, FunnelPlus, List, PackageSearch, ShoppingCart } from "lucide-react";
 import logo from "./inventario (2).png";
 import loginBg from "./warehouse-storage-shelves-with-cardboard-boxes.jpg";
 
@@ -32,4 +32,10 @@ export const SIDE_BAR_DATA = [
         icon: FunnelPlus,
         path: "/filter"
     },
+    {
+        id: "5",
+        label: "Calendar",
+        icon: Calendar,
+        path: "/calendar"
+    }
 ];
