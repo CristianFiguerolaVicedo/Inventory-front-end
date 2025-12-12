@@ -148,16 +148,7 @@ const AddSaleForm = ({onAddSale, products}) => {
                         value={item.quantity}
                         onChange={({target}) => {
                             const value = Number(target.value);
-                            const product = products.find(p => p.id === item.productId);
-                            const maxStock = product ? product.stock : 0;
-
-                            if (value > maxStock) {
-                                handleDetailChange(index, "quantity", maxStock);
-                            } else if (value < 0) {
-                                handleDetailChange(index, "quantity", 0);
-                            } else {
-                                handleDetailChange(index, "quantity", value)
-                            }
+                            handleDetailChange(index, "quantity", value);
                         }}
                         placeholder={`Max: ${products.find(p => p.id === item.productId)?.stock || 0}`}
                     />
