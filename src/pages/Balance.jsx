@@ -182,6 +182,12 @@ const Balance = () => {
                     onAddExpense={() => setOpenAddExpenseModal(true)}
                 />
 
+                <div>
+                    <h3 className="text-lg text-[#505746]">
+                        Select the month and year you want to see the total balance.
+                    </h3>
+                </div>
+
                 <div className="flex gap-4 items-center mb-4">
                     <select
                         value={selectedMonth}

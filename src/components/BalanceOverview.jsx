@@ -59,7 +59,7 @@ const BalanceOverview = ({incomes, expenses, sales, onAddIncome, onAddExpense}) 
                 <div className="bg-[#e5e1df] p-4 rounded-xl shadow-inner flex items-center justify-start gap-3">
                     <Coins size={20}/> Balance
                 </div>
-                <p className={`text-2xl mt-2 font-bold ${monthlyBalance >= 0 ? "text-green-700" : "text-red-700"}`}>
+                <p className="text-2xl mt-2 font-bold">
                     {monthlyBalance.toFixed(2)}&#36;
                 </p>
             </div>
