@@ -28,6 +28,16 @@ const BalanceOverview = ({incomes, expenses, sales, onAddIncome, onAddExpense}) 
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mt-4">
+                
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-4">
+                <div className="bg-[#e5e1df] p-4 rounded-xl shadow-inner flex items-center justify-start gap-3">
+                    <TrendingDown size={20} className="text-red-600"/> Expenses
+                </div>
+                <p className="text-2xl mt-2 text-red-500 font-bold">
+                    {totalExpenses.toFixed(2)}&#36;
+                </p>
                 <div className="bg-[#e5e1df] p-4 rounded-xl shadow-inner flex items-center justify-start gap-3">
                     <TrendingUp size={20} className="text-green-600"/> Incomes
                 </div>
@@ -42,15 +52,6 @@ const BalanceOverview = ({incomes, expenses, sales, onAddIncome, onAddExpense}) 
                 </div>
                 <p className="text-2xl mt-2 text-blue-600 font-bold">
                     {totalSalesNet.toFixed(2)}&#36;
-                </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mt-4">
-                <div className="bg-[#e5e1df] p-4 rounded-xl shadow-inner flex items-center justify-start gap-3">
-                    <TrendingDown size={20} className="text-red-600"/> Expenses
-                </div>
-                <p className="text-2xl mt-2 text-red-500 font-bold">
-                    {totalExpenses.toFixed(2)}&#36;
                 </p>
             </div>
 

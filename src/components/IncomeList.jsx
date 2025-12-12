@@ -8,7 +8,7 @@ const IncomesList = ({incomes, onDelete}) => {
             </h5>
 
             {incomes.length > 0 ? (
-                <table className="ww-full table-fixed">
+                <table className="w-full table-fixed">
                     <thead className="text-sm text-[#e5e1df] bg-[#505746]">
                         <tr>
                             <th className="p-2 text-left w-1/4">Name</th>

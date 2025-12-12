@@ -23,6 +23,10 @@ const Balance = () => {
     const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
     const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
 
+    const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [availableYears, setAvailableYears] = useState([]);
+
     const [openDeleteAlert, setOpenDeleteAlert] = useState({
         show: false,
         type: null,
@@ -55,6 +59,38 @@ const Balance = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        const allYears = [
+            ...incomes.map(i => new Date(i.date).getFullYear()),
+            ...expenses.map(e => new Date(e.date).getFullYear()),
+            ...sales.map(s => new Date(s.date).getFullYear()),
+        ];
+
+        const years = [...new Set(allYears)].sort();
+
+        if (years.length > 0) {
+            setAvailableYears(years);
+
+            if (!years.includes(selectedYear)) {
+                setSelectedYear(years[years.length - 1]);
+            }
+        }
+    }, [incomes, expenses, sales]);
+
+    const filterByMonth = (items) => {
+        return items.filter((item) => {
+            const itemDate = new Date(item.date);
+            const month = itemDate.getMonth() + 1;
+            const year = itemDate.getFullYear();
+
+            return month === selectedMonth && year === selectedYear;
+        })
+    }
+
+    const filteredIncomes = filterByMonth(incomes);
+    const filteredExpenses = filterByMonth(expenses);
+    const filteredSales = filterByMonth(sales);
 
     const handleAddIncome = async (income) => {
         const {name, date, amount} = income;
@@ -139,22 +175,48 @@ const Balance = () => {
         <Dashboard activeMenu="Balance">
             <div className="my-5 mx-auto grid grid-cols-1 gap-6">
                 <BalanceOverview 
-                    incomes={incomes}
-                    expenses={expenses}
-                    sales={sales}
+                    incomes={filteredIncomes}
+                    expenses={filteredExpenses}
+                    sales={filteredSales}
                     onAddIncome={() => setOpenAddIncomeModal(true)}
                     onAddExpense={() => setOpenAddExpenseModal(true)}
                 />
 
-                <IncomesList 
-                    incomes={incomes}
-                    onDelete={(id) => setOpenDeleteAlert({show: true, type: "income", id})}
-                />
+                <div className="flex gap-4 items-center mb-4">
+                    <select
+                        value={selectedMonth}
+                        onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                        className="border p-2 rounded"
+                    >
+                        {Array.from({length: 12}, (_, i) => (
+                            <option value={i + 1} key={i + 1}>
+                                {new Date(0, i).toLocaleString("en", {month: "long"})}
+                            </option>
+                        ))}
+                    </select>
 
-                <ExpenseList 
-                    expenses={expenses}
-                    onDelete={(id) => setOpenDeleteAlert({show: true, type: "expense", id})}
-                />
+                    <select
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(Number(e.target.value))}
+                        className="border p-2 rounded"
+                    >
+                        {availableYears.map((year) => (
+                            <option key={year} value={year}>{year}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="grid grid-cols-2">
+                    <IncomesList 
+                        incomes={filteredIncomes}
+                        onDelete={(id) => setOpenDeleteAlert({show: true, type: "income", id})}
+                    />
+
+                    <ExpenseList 
+                        expenses={filteredExpenses}
+                        onDelete={(id) => setOpenDeleteAlert({show: true, type: "expense", id})}
+                    />
+                </div>
 
                 <Modal
                     isOpen={openAddIncomeModal}
