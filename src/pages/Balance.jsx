@@ -186,7 +186,7 @@ const Balance = () => {
                     <select
                         value={selectedMonth}
                         onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                        className="border p-2 rounded"
+                        className="bg-[#717866] text-[#e5e1df] p-2 rounded"
                     >
                         {Array.from({length: 12}, (_, i) => (
                             <option value={i + 1} key={i + 1}>
@@ -198,7 +198,7 @@ const Balance = () => {
                     <select
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(Number(e.target.value))}
-                        className="border p-2 rounded"
+                        className="bg-[#717866] text-[#e5e1df] p-2 rounded"
                     >
                         {availableYears.map((year) => (
                             <option key={year} value={year}>{year}</option>
