@@ -22,7 +22,7 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
                 {value: "", label: "Choose an option"},
                 {value: "IN_STOCK", label: "In Stock"}
             ];
-        } else if (product.stock === 0 || !product.stock) {
+        } else if (product.stock <= 0 || !product.stock) {
             return [
                 {value: "", label: "Choose an option"},
                 {value: "SOLD_OUT", label: "Sold Out"},
