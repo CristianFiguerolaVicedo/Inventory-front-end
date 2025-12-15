@@ -150,7 +150,6 @@ const AddSaleForm = ({onAddSale, products}) => {
                             const value = Number(target.value);
                             handleDetailChange(index, "quantity", value);
                         }}
-                        placeholder={`Max: ${products.find(p => p.id === item.productId)?.stock || 0}`}
                     />
 
                     {sale.details.length > 1 && (

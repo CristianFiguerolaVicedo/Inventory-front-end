@@ -19,10 +19,12 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
     const getStatusOptions = () => {
         if (product.stock > 0) {
             return [
+                {value: "", label: "Choose an option"},
                 {value: "IN_STOCK", label: "In Stock"}
             ];
         } else if (product.stock === 0 || !product.stock) {
             return [
+                {value: "", label: "Choose an option"},
                 {value: "SOLD_OUT", label: "Sold Out"},
                 {value: "COMING_SOON", label: "Coming Soon"}
             ];

@@ -36,13 +36,13 @@ const BalanceOverview = ({incomes, expenses, sales, onAddIncome, onAddExpense}) 
                     <TrendingDown size={20} className="text-red-600"/> Expenses
                 </div>
                 <p className="text-2xl mt-2 text-red-500 font-bold">
-                    {totalExpenses.toFixed(2)}&#36;
+                    {totalExpenses.toFixed(2)}€
                 </p>
                 <div className="bg-[#e5e1df] p-4 rounded-xl shadow-inner flex items-center justify-start gap-3">
                     <TrendingUp size={20} className="text-green-600"/> Incomes
                 </div>
                 <p className="text-2xl mt-2 text-green-600 font-bold">
-                    {totalNonSaleIncomes.toFixed(2)}&#36;
+                    {totalNonSaleIncomes.toFixed(2)}€
                 </p>
             </div>
 
@@ -51,7 +51,7 @@ const BalanceOverview = ({incomes, expenses, sales, onAddIncome, onAddExpense}) 
                     <ShoppingCart size={20} className="text-blue-600"/> Sales
                 </div>
                 <p className="text-2xl mt-2 text-blue-600 font-bold">
-                    {totalSalesNet.toFixed(2)}&#36;
+                    {totalSalesNet.toFixed(2)}€
                 </p>
             </div>
 
@@ -60,7 +60,7 @@ const BalanceOverview = ({incomes, expenses, sales, onAddIncome, onAddExpense}) 
                     <Coins size={20}/> Balance
                 </div>
                 <p className="text-2xl mt-2 font-bold">
-                    {monthlyBalance.toFixed(2)}&#36;
+                    {monthlyBalance.toFixed(2)}€
                 </p>
             </div>
         </div>

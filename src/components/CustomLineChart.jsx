@@ -30,7 +30,7 @@ const CustomLineChart = ({data}) => {
                     </p>
                     <hr className="my-1 border-gray-200" />
                     <p className="text-sm text-gray-700 font-bold mb-2">
-                        Total: <span className="text-[#505746]">&#36;{addThousandSeparator(dataPoint.totalAmount)}</span>
+                        Total: <span className="text-[#505746]">€{addThousandSeparator(dataPoint.totalAmount)}</span>
                     </p>
 
                     {productsInTooltip && productsInTooltip > 0 && (
@@ -41,7 +41,7 @@ const CustomLineChart = ({data}) => {
                             {productsInTooltip.map((groupedItem, index) => (
                                 <div key={index} className="flex justify-between text-xs text-gray-700">
                                     <span>{groupedItem.productName}</span>
-                                    <span>&#36;{addThousandSeparator(groupedItem.totalAmount)}</span>
+                                    <span>€{addThousandSeparator(groupedItem.totalAmount)}</span>
                                 </div>
                             ))}
                         </div>
