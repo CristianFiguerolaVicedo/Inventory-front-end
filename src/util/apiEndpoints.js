@@ -1,5 +1,5 @@
-//export const BASE_URL = "https://inventory-back-end-3u2z.onrender.com/api/v1.0";
-export const BASE_URL = "http://localhost:8080/api/v1.0";
+export const BASE_URL = "https://inventory-back-end-3u2z.onrender.com/api/v1.0";
+//export const BASE_URL = "http://localhost:8080/api/v1.0";
 
 const CLOUDINARY_NAME = "di1bsahds";
 
