@@ -59,13 +59,13 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
         }
     }, [isEditing, initialProductData])
 
-    const categoryOptions = [
-        {value: "", label: "Choose a category"},
+    const categoryOptions = 
+        //{value: "", label: "Choose a category"},
         categories.map(category => ({
             value: category.id,
             label: category.name
-        }))
-    ];
+        }));
+    //];
 
     const handleChange = (key, value) => {
         setProduct({...product, [key]: value});
