@@ -145,7 +145,7 @@ const Product = () => {
             return;
         }
 
-        if (!stock || isNaN(stock) || Number(stock) <= 0) {
+        if (!stock || isNaN(stock)) {
             toast.error("Please enter a valid stock number");
             return;
         }
