@@ -140,6 +140,8 @@ const Product = () => {
     const handleUpdateProduct = async (updatedProduct) => {
         const {id, name, stock, packaging, production_price, pvp, status, notes, categoryId} = updatedProduct;
 
+        console.log("Product to update on Product", updatedProduct);
+
         if (!name.trim()) {
             toast.error("Please enter a name");
             return;
@@ -172,11 +174,6 @@ const Product = () => {
 
         if (!categoryId) {
             toast.error("You have to select a category");
-            return;
-        }
-
-        if (!id) {
-            toast.error("Category id is missing for update");
             return;
         }
 

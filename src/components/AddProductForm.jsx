@@ -36,6 +36,7 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
     useEffect(() => {
         if (isEditing && initialProductData) {
             setProduct({
+                id: initialProductData.id,
                 name: initialProductData.name,
                 stock: initialProductData.stock,
                 packaging: initialProductData.packaging,
@@ -59,19 +60,35 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
         }
     }, [isEditing, initialProductData])
 
-    const categoryOptions = [
-        {value: "", label: "Choose a category"},
-        ...categories.map(category => ({
+    console.log("Product to edit", initialProductData);
+
+    const categoryOptions = categories.map(category => ({
             value: category.id,
             label: category.name
-        }))
-    ];
+    }));
+
+    useEffect(() => {
+        if (!categories.length) return;
+
+        setProduct(prev => {
+            if (isEditing && prev.categoryId) {
+                return prev;
+            }
+
+            return {
+                ...prev,
+                categoryId: categories[0].id
+            };
+        });
+    }, [categories, isEditing]);
 
     const handleChange = (key, value) => {
         setProduct({...product, [key]: value});
     }
 
     const handleAddProduct = async () => {
+        if (!product.categoryId) return;
+
         setLoading(true);
 
         try{
@@ -82,10 +99,14 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
     }
 
     useEffect(() => {
-        if (categories.length > 0 && !product.categoryId) {
-            setProduct((prev) => ({...prev, categoryId: categories[0].id}));
+        if (!isEditing && categories.length > 0 && !product.categoryId) {
+            setProduct(prev => ({
+                ...prev,
+                categoryId: ""
+            }));
         }
-    }, [categories, product.categoryId]);
+    }, [categories, isEditing]);
+
 
     useEffect(() => {
         const validStatuses = getStatusOptions().map(opt => opt.value);
