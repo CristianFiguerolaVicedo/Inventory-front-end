@@ -74,3 +74,5 @@ This app uses a palette of green and white using the following colors:
 #949488
 #717866
 #505746
+
+### You can see more details and screenshots in the portfolio of my web: <https://cristianfigvic.free.nf>
