@@ -61,7 +61,7 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
     }, [isEditing, initialProductData])
 
     const categoryOptions = [
-        { value: "", label: "Elegir categoría" },
+        { value: "", label: "Choose a category" },
         ...categories.map(category => ({
             value: category.id,
             label: category.name
