@@ -61,12 +61,12 @@ const Register = () => {
 
             const response = await axiosConfig.post(API_ENDPOINTS.REGISTER, {name, email, password, profileImageUrl});
             if (response.status === 201) {
-                toast.success("Successfully registered!.");
+                toast.success("Successfully registered!");
                 navigate("/login");
             }
         } catch (error) {
             console.error("Something went wrong", error);
-            setError(error.message);
+            setError("This user already exists");
         } finally {
             setIsLoading(false);
         }

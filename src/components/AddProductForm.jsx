@@ -60,12 +60,14 @@ const AddProductForm = ({onAddProduct, isEditing, initialProductData, categories
         }
     }, [isEditing, initialProductData])
 
-    console.log("Product to edit", initialProductData);
-
-    const categoryOptions = categories.map(category => ({
+    const categoryOptions = [
+        { value: "", label: "Elegir categoría" },
+        ...categories.map(category => ({
             value: category.id,
             label: category.name
-    }));
+        }))
+    ];
+
 
     useEffect(() => {
         if (!categories.length) return;
